@@ -1,13 +1,23 @@
-FROM golang:latest
-MAINTAINER CenturyLink Labs <clt-labs-futuretech@centurylink.com>
+FROM golang:1.5
 
+# FUSE
+RUN \
+  apt-get update -yq && \
+  apt-get install -yq --no-install-recommends \
+    git \
+    ca-certificates \
+    curl \
+    fuse && \
+  apt-get clean && \
+  rm -rf /var/lib/apt
+
+# Install Pachyderm job-shim
+RUN go get github.com/pachyderm/pachyderm && \
+	go get github.com/pachyderm/pachyderm/src/server/cmd/job-shim && \
+    cp $GOPATH/bin/job-shim /job-shim
+
+# prepare the build environment
 RUN apt-get update && apt-get install -y upx-ucl
-
-# Install Docker binary
-RUN wget -nv \
-  https://get.docker.com/builds/Linux/x86_64/docker-1.9.0 -O /usr/bin/docker && \
-  chmod +x /usr/bin/docker
-
 RUN go get github.com/pwaller/goupx
 
 VOLUME /src

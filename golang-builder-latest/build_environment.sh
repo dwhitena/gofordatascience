@@ -28,7 +28,4 @@ elif [ -e "$pkgPath/Godeps/_workspace" ];
 then
   # Add local godeps dir to GOPATH
   GOPATH=$pkgPath/Godeps/_workspace:$GOPATH
-else
-  # Get all package dependencies
-  go get -d -v $pkgName/...
 fi
