@@ -1,0 +1,19 @@
+{
+  "pipeline": {
+    "name": "filter"
+  },
+  "transform": {
+    "image": "dwhitena/repofilter",
+    "cmd": [ "/repofilter" ],
+    "stdin": []
+  },
+  "parallelism": "1",
+  "inputs": [
+    {
+      "repo": {
+        "name": "repodata"
+      },
+      "method": "map"
+    }
+  ]
+}
