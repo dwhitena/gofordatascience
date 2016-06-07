@@ -2,32 +2,33 @@
 
 tagName=$1
 
-if ( find /src -maxdepth 0 -empty | read v );
-then
-  echo "Error: Must mount Go source code into /src directory"
-  exit 990
-fi
+# Grab the source code
+go get -d github.com/hashicorp/consul/...
+
+echo "here 1"
 
 # Grab Go package name
-pkgName="$(go list -e -f '{{.ImportComment}}' 2>/dev/null || true)"
+pkgName=github.com/hashicorp/consul
+
+echo "here 2"
 
 if [ -z "$pkgName" ];
 then
-  echo "Error: Must add canonical import path to root package"
+  echo "Error: Must add package name as env var"
   exit 992
 fi
+
+echo "here 3"
 
 # Grab just first path listed in GOPATH
 goPath="${GOPATH%%:*}"
 
+echo "here 4"
+
 # Construct Go package path
 pkgPath="$goPath/src/$pkgName"
 
-# Set-up src directory tree in GOPATH
-mkdir -p "$(dirname "$pkgPath")"
-
-# Link source dir into GOPATH
-ln -sf /src "$pkgPath"
+echo "here 5"
 
 if [ -e "$pkgPath/vendor" ];
 then
@@ -39,5 +40,5 @@ then
   GOPATH=$pkgPath/Godeps/_workspace:$GOPATH
 else
   # Get all package dependencies
-  go get -t -d -v ./...
+  go get -d -v $pkgName/...
 fi
