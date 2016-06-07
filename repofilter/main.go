@@ -9,7 +9,7 @@ import (
 
 func main() {
 
-	csvfile, err := os.Open("/pfs/repodata.csv")
+	csvfile, err := os.Open("/pfs/repodata/repodata.csv")
 	if err != nil {
 		log.Fatal(err)
 	}
