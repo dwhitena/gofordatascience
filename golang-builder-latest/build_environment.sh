@@ -3,14 +3,10 @@
 tagName=$1
 
 # Grab the source code
-go get -d github.com/hashicorp/consul/...
-
-echo "here 1"
+go get -d github.com/$REPONAME/...
 
 # Grab Go package name
-pkgName=github.com/hashicorp/consul
-
-echo "here 2"
+pkgName=github.com/$REPONAME
 
 if [ -z "$pkgName" ];
 then
@@ -18,17 +14,11 @@ then
   exit 992
 fi
 
-echo "here 3"
-
 # Grab just first path listed in GOPATH
 goPath="${GOPATH%%:*}"
 
-echo "here 4"
-
 # Construct Go package path
 pkgPath="$goPath/src/$pkgName"
-
-echo "here 5"
 
 if [ -e "$pkgPath/vendor" ];
 then
