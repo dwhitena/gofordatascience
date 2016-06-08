@@ -25,7 +25,7 @@
     "image": "dwhitena/golangbuild16",
     "cmd": [ "sh" ],
     "stdin": [
-        "for filename in /pfs/filter/*; do"
+        "for filename in /pfs/filter/*; do",
 		"REPONAME=`cat /pfs/filter/$filename`",
 		"source /build.sh > /pfs/out/$filename",
 	"done"
