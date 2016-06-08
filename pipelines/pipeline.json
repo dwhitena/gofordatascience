@@ -22,7 +22,7 @@
     "name": "compile16"
   },
   "transform": {
-    "image": "dwhitena/golangbuild16",
+    "image": "dwhitena/golangbuilder16",
     "cmd": [ "sh" ],
     "stdin": [
         "for filename in /pfs/filter/*; do",
