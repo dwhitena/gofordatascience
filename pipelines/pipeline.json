@@ -17,3 +17,27 @@
     }
   ]
 }
+{
+  "pipeline": {
+    "name": "compile16"
+  },
+  "transform": {
+    "image": "dwhitena/golangbuild16",
+    "cmd": [ "sh" ],
+    "stdin": [
+        "for filename in /pfs/filter/*; do"
+		"REPONAME=`cat /pfs/filter/$filename`",
+		"source /build.sh > /pfs/out/$filename",
+	"done"
+    ]
+  },
+  "parallelism": "1",
+  "inputs": [
+    {
+      "repo": {
+        "name": "filter"
+      },
+      "method": "map"
+    }
+  ]
+}

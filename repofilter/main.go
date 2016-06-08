@@ -5,6 +5,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strconv"
 )
 
 func main() {
@@ -22,11 +23,14 @@ func main() {
 		log.Fatal(err)
 	}
 
+	count := 0
 	for _, each := range rawCSVdata {
+		intString := strconv.Itoa(count)
 		d1 := []byte(each[0])
-		err = ioutil.WriteFile("/pfs/out/"+each[0], d1, 0644)
+		err = ioutil.WriteFile("/pfs/out/"+intString, d1, 0644)
 		if err != nil {
 			log.Fatal(err)
 		}
+		count++
 	}
 }

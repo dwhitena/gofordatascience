@@ -1,4 +1,4 @@
-FROM golang:latest
+FROM golang:1.6
 
 # FUSE
 RUN \
