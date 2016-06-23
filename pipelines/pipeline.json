@@ -23,11 +23,12 @@
   },
   "transform": {
     "image": "dwhitena/golangbuilder16",
-    "cmd": [ "sh" ],
+    "cmd": [ "/bin/bash" ],
     "stdin": [
         "for filename in /pfs/filter/*; do",
-		"REPONAME=`cat /pfs/filter/$filename`",
-		"source /build.sh > /pfs/out/$filename",
+		"REPONAME=`cat $filename`",
+		"new_name=`basename $filename`",
+		"source /build.sh > /pfs/out/$new_name",	
 	"done"
     ]
   },
