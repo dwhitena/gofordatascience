@@ -8,7 +8,6 @@ deps=`wc -l dep.log | cut -d' ' -f1`;
 
 # get number of lines of go code
 golines=`( find $pkgPath -name '*.go' -print0 | xargs -0 cat ) | wc -l`
-#golines=`find $pkgPath -name '*.go' | xargs wc -l`
 
 # time the compile of the statically linked version of package
 START_TIME=$(date +%s%N)
@@ -23,4 +22,9 @@ else
    echo $REPONAME, $ELAPSED_TIME, $deps, $golines
 fi
 
+# clean up
 rm compile.log
+rm dep.log
+rm -r $GOPATH/src/*
+rm -r $GOPATH/bin/*
+rm -r /src/*
